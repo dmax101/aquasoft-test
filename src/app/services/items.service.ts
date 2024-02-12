@@ -5,13 +5,30 @@ import { Item } from '../interfaces/item';
   providedIn: 'root',
 })
 export class ItemsService {
-  private items: Item[] = [
-    { id: 1, nome: 'Danilo' },
-    { id: 2, nome: 'Flavia' },
-    { id: 3, nome: 'Sofia' },
-  ];
+  private items!: Item[];
 
-  constructor() {}
+  constructor() {
+    this.loadItems();
+  }
+
+  // Carrega os itens do localStorage
+  private loadItems(): void {
+    const storedItems = localStorage.getItem('items');
+    if (storedItems) {
+      this.items = JSON.parse(storedItems);
+    } else {
+      this.items = [
+        { id: 1, nome: 'Danilo' },
+        { id: 2, nome: 'Flavia' },
+        { id: 3, nome: 'Sofia' },
+      ];
+    }
+  }
+
+  // Salva os itens no localStorage
+  private saveItems(): void {
+    localStorage.setItem('items', JSON.stringify(this.items));
+  }
 
   // Retorna todos os items
   getItems(): Item[] {
@@ -28,6 +45,8 @@ export class ItemsService {
     const newId = Math.max(...this.items.map((item) => item.id)) + 1;
 
     this.items.push({ ...item, id: newId });
+
+    this.saveItems();
   }
 
   // Atualiza um item existente
@@ -35,17 +54,21 @@ export class ItemsService {
     const index = this.items.findIndex((e) => e.id === item.id);
     if (index !== -1) {
       this.items[index] = item;
+
+      this.saveItems();
     }
   }
 
   // Remove um item pelo ID
   removeItem(id: number): void {
     this.items = this.items.filter((item) => item.id !== id);
+    this.saveItems();
   }
 
   // Ordena os items pelo nome
   orderItems(): void {
     this.items.sort((a, b) => a.nome.localeCompare(b.nome));
+    this.saveItems();
   }
 
   // Troca a ordem de elementos existentes pelos índices fornecidos
@@ -58,11 +81,13 @@ export class ItemsService {
         this.items[index2],
         this.items[index1],
       ];
+      this.saveItems();
     }
   }
 
   //Salva nova ordem dos elementos
   saveNewOrder(items: Item[]) {
     this.items = items;
+    this.saveItems();
   }
 }
