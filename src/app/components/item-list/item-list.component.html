@@ -7,21 +7,23 @@
   >
     <div class="flex flex-col justify-center items-center w-fit">
       <button
-      (click)="onClickSwitch(i, 1)"
-      [disabled]="i <= 0"
-      class="disabled:text-slate-100"
+        (click)="onClickSwitch(i, 1)"
+        [disabled]="i <= 0"
+        class="disabled:text-slate-100"
       >
         <span class="material-symbols-outlined text-xl"> arrow_drop_up </span>
       </button>
       <button
-      (click)="onClickSwitch(i, -1)"
-      [disabled]="i >= l - 1"
-      class="disabled:text-slate-100"
+        (click)="onClickSwitch(i, -1)"
+        [disabled]="i >= l - 1"
+        class="disabled:text-slate-100"
       >
         <span class="material-symbols-outlined text-xl"> arrow_drop_down </span>
       </button>
     </div>
-    <span class="uppercase w-full">({{item.id}}) {{ item.nome }} {{ i }}, {{ l }}</span>
+    <span class="uppercase w-full"
+      >({{ item.id }}) {{ item.nome }} {{ i }}, {{ l }}</span
+    >
     <div class="flex flex-row gap-2">
       <button
         (click)="onClickEdit(item.id)"
@@ -40,8 +42,16 @@
 </ul>
 
 <div class="mt-4 flex flex-row justify-between items-center">
-  <button class="bg-slate-600 flex flex-row justify-center items-center p-3 rounded-xl text-white text-sm hover:bg-slate-300 hover:text-slate-800 transition-all">Salvar Nova Ordem</button>
-  <button class="bg-green-600 flex flex-row justify-center items-center p-3 rounded-xl text-white text-sm hover:bg-green-300 hover:text-slate-800 transition-all"><span class="material-symbols-outlined">
-add
-</span> Adicionar</button>
+  <button
+    (click)="onClickSaveNewOrder()"
+    class="bg-slate-600 flex flex-row justify-center items-center p-3 rounded-xl text-white text-sm hover:bg-slate-300 hover:text-slate-800 transition-all"
+  >
+    Salvar Nova Ordem
+  </button>
+  <button
+    (click)="onClickAddForm()"
+    class="bg-green-600 flex flex-row justify-center items-center p-3 rounded-xl text-white text-sm hover:bg-green-300 hover:text-slate-800 transition-all"
+  >
+    <span class="material-symbols-outlined"> add </span> Adicionar
+  </button>
 </div>

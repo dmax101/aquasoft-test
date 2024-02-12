@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { Item } from '../../interfaces/item';
 import { ItemsService } from '../../services/items.service';
+import { AddFormComponent } from '../add-form/add-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-item-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AddFormComponent],
   templateUrl: './item-list.component.html',
   styleUrl: './item-list.component.scss',
 })
@@ -18,7 +20,7 @@ export class ItemListComponent implements OnInit {
     { id: 2, nome: 'Item 2' },
   ]);
 
-  constructor(private itemsService: ItemsService) {}
+  constructor(private itemsService: ItemsService, private router: Router) {}
 
   ngOnInit(): void {
     this.updateItems();
@@ -43,5 +45,14 @@ export class ItemListComponent implements OnInit {
       this.items.value[index].id
     );
     this.updateItems();
+  }
+
+  onClickSaveNewOrder() {
+    this.itemsService.saveNewOrder(this.items.value);
+    alert('Nova ordem salva!');
+  }
+
+  onClickAddForm() {
+    this.router.navigate(['/add']);
   }
 }

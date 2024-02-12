@@ -25,7 +25,9 @@ export class ItemsService {
 
   // Adiciona um novo item
   addItem(item: Item): void {
-    this.items.push(item);
+    const newId = Math.max(...this.items.map((item) => item.id)) + 1;
+
+    this.items.push({ ...item, id: newId });
   }
 
   // Atualiza um item existente

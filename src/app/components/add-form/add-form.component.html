@@ -1,0 +1,30 @@
+<h1 class="text-2xl text-center font-bold w-full border-b-2 mb-4">
+  Adicionar Nome
+</h1>
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+  <div class="w-full flex flex-col justify-center items-center gap-2">
+    <label for="nome">Nome:</label>
+    <input
+      class="w-full p-4 text-xl text-center rounded-xl"
+      id="nome"
+      type="text"
+      formControlName="nome"
+    />
+  </div>
+
+  <div class="mt-4 flex flex-row justify-between items-center">
+    <button
+      (click)="onClickBackToList()"
+      class="bg-slate-600 flex flex-row justify-center items-center p-3 rounded-xl text-white text-sm hover:bg-slate-300 hover:text-slate-800 transition-all"
+    >
+      <span class="material-symbols-outlined"> arrow_back </span> Voltar
+    </button>
+    <button
+      type="submit"
+      [disabled]="itemForm.invalid"
+      class="bg-green-600 flex flex-row justify-center items-center p-3 rounded-xl text-white text-sm hover:bg-green-300 hover:text-slate-800 transition-all"
+    >
+      <span class="material-symbols-outlined"> add </span> Adicionar
+    </button>
+  </div>
+</form>
