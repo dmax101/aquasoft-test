@@ -32,6 +32,7 @@ export class AddFormComponent {
   onSubmit(): void {
     if (this.itemForm.valid) {
       this.itemsService.addItem(this.itemForm.value);
+      alert('Nome adicionado!');
       this.itemForm.reset();
     }
   }

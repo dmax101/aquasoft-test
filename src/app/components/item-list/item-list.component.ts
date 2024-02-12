@@ -31,7 +31,7 @@ export class ItemListComponent implements OnInit {
   }
 
   onClickEdit(id: number) {
-    console.log('Edit', id);
+    this.router.navigate([`edit/${id}`]);
   }
 
   onClickDelete(id: number) {
